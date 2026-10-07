@@ -1,4 +1,5 @@
 ﻿using library.Models;
+using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 
 namespace library.Data;
@@ -85,8 +86,21 @@ public class BookRepository
 
         await command.ExecuteNonQueryAsync();
     }
+    // DELETE: remove one book.
+    public async Task DeleteAsync(long id)
+    {
+        const string sql = "DELETE FROM lending.book WHERE book_id = @id;";
 
+        await using var command = _dataSource.CreateCommand(sql);
+        command.Parameters.AddWithValue("id", id);
 
-
+        await command.ExecuteNonQueryAsync();
+    }
 
 }
+
+
+
+
+
+
