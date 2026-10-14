@@ -1,0 +1,180 @@
+﻿@model List<Member>
+
+@{
+    ViewData["Title"] = "Members";
+}
+
+<div class="cny-page">
+
+    <div class="cny-header">
+
+        <div class="cny-lantern left">
+            LANTERN
+        </div>
+
+        <div class="cny-title">
+
+            <div class="cny-small-title">
+                LIBRARY ATTENDANCE
+            </div>
+
+            <h1>Member Attendance</h1>
+
+            <div class="cny-ornament">
+                * ━━━━━ DRAGON ━━━━━ *
+            </div>
+
+            <p>
+                Library Member Attendance · @Model.Count Members
+            </p>
+
+        </div>
+
+        <div class="cny-lantern right">
+            LANTERN
+        </div>
+
+    </div>
+
+
+    <div class="cny-actions">
+
+        <a asp-action="Create" class="btn btn-cny">
+            Register Member
+        </a>
+
+    </div>
+
+
+    <div class="cny-divider">
+        DRAGON · PROSPERITY · COMMUNITY
+    </div>
+
+
+    <div class="cny-scroll">
+
+        <div class="cny-scroll-header">
+
+            <span>DRAGON</span>
+
+            <div>
+                <h2>Attendance Records</h2>
+                <p>Fortune · Discipline · Community</p>
+            </div>
+
+            <span>DRAGON</span>
+
+        </div>
+
+
+        <div class="table-responsive">
+
+            <table class="table cny-table align-middle">
+
+                <thead>
+                    <tr>
+
+                        <th style="width:5rem">
+                            ID
+                        </th>
+
+                        <th>
+                            Member Name
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Member Type
+                        </th>
+
+                        <th>
+                            Attendance
+                        </th>
+
+                        <th style="width:12rem">
+                            Actions
+                        </th>
+
+                    </tr>
+                </thead>
+
+
+                <tbody>
+
+                    @foreach (var member in Model)
+                    {
+                        <tr>
+
+                            <td class="cny-number">
+                                @member.MemberId
+                            </td>
+
+
+                            <td class="cny-name">
+                                @member.FullName
+                            </td>
+
+
+                            <td>
+                                @(member.Email ?? "—")
+                            </td>
+
+
+                            <td>
+                                <span class="cny-badge">
+                                    @member.MemberType
+                                </span>
+                            </td>
+
+
+                            <td>
+                                <span class="cny-attendance">
+                                    Registered
+                                </span>
+                            </td>
+
+
+                            <td>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@member.MemberId"
+                                   class="btn btn-sm btn-cny-outline">
+                                    Edit
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@member.MemberId"
+                                   class="btn btn-sm btn-cny-danger">
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="cny-footer">
+
+        <div>
+            DRAGON · PROSPERITY · FORTUNE
+        </div>
+
+        <small>
+            May every member bring good fortune to our library.
+        </small>
+
+    </div>
+
+</div>
