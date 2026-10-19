@@ -1,7 +1,7 @@
 ﻿using library.Data;
 using library.Models;
 using Microsoft.AspNetCore.Mvc;
-namespace library.Controllers;
+namespace library.Controllers; 
 
 public class BooksController : Controller
 {
