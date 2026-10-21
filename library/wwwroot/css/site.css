@@ -1,31 +1,398 @@
+/* =========================================
+   LIBRARY SYSTEM - MODERN CSS DESIGN
+   ========================================= */
+
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    margin-bottom: 60px;
+    background: #f3efe7;
+    color: #282522;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* =========================================
+   NAVBAR
+   ========================================= */
+
+.navbar {
+    background: #211f1c !important;
+    min-height: 64px;
+    padding: 0.6rem 1.5rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+    border-bottom: 3px solid #b88a44;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.navbar-brand {
+    color: #f2d28b !important;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+    .navbar-brand:hover {
+        color: #fff1c7 !important;
+    }
+
+.navbar .nav-link {
+    color: #e5e0d8 !important;
+    font-weight: 500;
+    margin: 0 5px;
+    padding: 9px 13px !important;
+    border-radius: 7px;
+    transition: all 0.25s ease;
+}
+
+    .navbar .nav-link:hover {
+        background: #3a342d;
+        color: #f2d28b !important;
+        transform: translateY(-1px);
+    }
+
+/* =========================================
+   MAIN CONTAINER
+   ========================================= */
+
+.container {
+    max-width: 1100px;
+}
+
+/* =========================================
+   HEADINGS
+   ========================================= */
+
+h1 {
+    color: #211f1c;
+    font-size: 2.3rem;
+    font-weight: 800;
+    margin-top: 20px;
+    margin-bottom: 0.3rem;
+    letter-spacing: -1px;
+}
+
+    h1::after {
+        content: "";
+        display: block;
+        width: 55px;
+        height: 4px;
+        margin-top: 10px;
+        background: #b88a44;
+        border-radius: 10px;
+    }
+
+/* =========================================
+   PAGE DESCRIPTION
+   ========================================= */
+
+.text-muted {
+    color: #756e65 !important;
+}
+
+/* =========================================
+   ADD BUTTON
+   ========================================= */
+
+.btn-primary {
+    background: #6f512c;
+    border: none;
+    color: white;
+    padding: 10px 17px;
+    border-radius: 8px;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(111, 81, 44, 0.2);
+    transition: all 0.25s ease;
+}
+
+    .btn-primary:hover {
+        background: #4f391f;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 7px 15px rgba(79, 57, 31, 0.25);
+    }
+
+/* =========================================
+   TABLE CONTAINER
+   ========================================= */
+
+.table {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background: white;
+    border: none !important;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(45, 38, 30, 0.10);
+}
+
+    /* =========================================
+   TABLE HEADER
+   ========================================= */
+
+    .table thead th {
+        background: #242424;
+        color: #f3d58e;
+        padding: 16px 14px;
+        border: none !important;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        vertical-align: middle;
+    }
+
+        .table thead th:first-child {
+            text-align: center;
+        }
+
+        .table thead th:last-child {
+            text-align: center;
+        }
+
+    /* =========================================
+   TABLE BODY
+   ========================================= */
+
+    .table tbody td {
+        padding: 14px;
+        border-color: #ebe6de;
+        vertical-align: middle;
+        color: #302d29;
+    }
+
+    .table tbody tr {
+        background: white;
+        transition: all 0.2s ease;
+    }
+
+        /* Alternating rows */
+
+        .table tbody tr:nth-child(even) {
+            background: #faf9f6;
+        }
+
+        /* Hover effect */
+
+        .table tbody tr:hover {
+            background: #f7efdf;
+            box-shadow: inset 4px 0 0 #b88a44;
+        }
+
+    /* ID column */
+
+    .table tbody td:first-child {
+        text-align: center;
+        font-weight: 700;
+        color: #80673f;
+    }
+
+    /* Email */
+
+    .table tbody td:nth-child(3) {
+        color: #655f57;
+    }
+
+    /* Join date */
+
+    .table tbody td:nth-child(5) {
+        color: #655f57;
+        font-family: Consolas, monospace;
+        font-size: 0.9rem;
+    }
+
+    /* Actions */
+
+    .table th:last-child,
+    .table td:last-child {
+        width: 155px;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+/* =========================================
+   ACTION BUTTONS
+   ========================================= */
+
+.btn-warning {
+    background: #f1dfb7;
+    border: 1px solid #d5b66e;
+    color: #62491f;
+    font-weight: 600;
+    border-radius: 7px;
+    padding: 6px 11px;
+    transition: all 0.2s ease;
+}
+
+    .btn-warning:hover {
+        background: #d8b15e;
+        border-color: #c29a4a;
+        color: #302411;
+        transform: translateY(-1px);
+    }
+
+.btn-danger {
+    background: white;
+    border: 1px solid #d9534f;
+    color: #c33c38;
+    font-weight: 600;
+    border-radius: 7px;
+    padding: 6px 11px;
+    transition: all 0.2s ease;
+}
+
+    .btn-danger:hover {
+        background: #c33c38;
+        border-color: #c33c38;
+        color: white;
+        transform: translateY(-1px);
+    }
+
+/* =========================================
+   FORMS / CARDS
+   ========================================= */
+
+.card {
+    border: none;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 8px 30px rgba(45, 38, 30, 0.10);
+    border-top: 4px solid #b88a44;
+}
+
+.form-label {
+    color: #3b352e;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-control,
+.form-select {
+    border: 1px solid #d8d0c4;
+    border-radius: 8px;
+    padding: 11px 13px;
+    background: #fcfbf8;
+    transition: all 0.2s ease;
+}
+
+    .form-control:hover,
+    .form-select:hover {
+        border-color: #bca274;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background: white;
+        border-color: #b88a44;
+        box-shadow: 0 0 0 3px rgba(184, 138, 68, 0.15);
+    }
+
+/* Textarea */
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* =========================================
+   DELETE CONFIRMATION
+   ========================================= */
+
+dl.row {
+    background: #faf8f4;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ebe3d6;
+}
+
+dl dt {
+    color: #66543a;
+}
+
+dl dd {
+    color: #292622;
+    font-weight: 500;
+}
+
+/* =========================================
+   VALIDATION
+   ========================================= */
+
+.text-danger {
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+}
+
+/* =========================================
+   FOCUS EFFECTS
+   ========================================= */
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 3px rgba(184, 138, 68, 0.25);
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+footer {
+    background: #211f1c;
+    color: #bcb6ad;
+    border-top: 3px solid #b88a44;
+    padding: 18px 0;
+}
+
+    footer a {
+        color: #f2d28b;
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            color: white;
+        }
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 767px) {
+
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .table {
+        font-size: 0.82rem;
+    }
+
+        .table thead th,
+        .table tbody td {
+            padding: 9px 7px;
+        }
+
+        .table th:last-child,
+        .table td:last-child {
+            width: auto;
+        }
+
+    .btn-sm {
+        margin: 2px;
+    }
 }
