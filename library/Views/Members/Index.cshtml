@@ -18,7 +18,8 @@
             <th>Full Name</th>
             <th>Email</th>
             <th>Member Type</th>
-            <th>Join Date</th>
+            <th class="text-end">Join Date</th>
+            <th style="width:10rem"></th>
         </tr> 
     </thead>
     <tbody>
@@ -29,7 +30,7 @@
                 <td>@member.FullName</td>
                 <td>@member.Email</td>
                 <td><span class="badge text-bg-secondary">@(member.MemberType ?? "—")</span></td>
-                <td class="text-end">@(member.  JoinDate.ToString("yyyy-MM-dd") ?? "—")</td>
+                <td class="text-end">@(member.JoinDate.ToString("yyyy-MM-dd") ?? "—")</td>
                 <td class="text-end">
                     <a asp-action="Edit" asp-route-id="@member.MemberId" class="btn btn-sm btn-outline-secondary">Edit</a>
                     <a asp-action="Delete" asp-route-id="@member.MemberId" class="btn btn-sm btn-outline-danger">Delete</a>
