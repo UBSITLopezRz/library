@@ -1,12 +1,14 @@
-﻿@model Book
+﻿@model Note
+
 @{
-    ViewData["Title"] = "Edit a book";
+    ViewData["Title"] = "Edit a note";
 }
 
-<h1 class="mb-3">Edit a book</h1>
+<h1 class="mb-3">Edit a Note</h1>
 
 <form asp-action="Edit" method="post" class="card card-body" style="max-width:36rem">
-    <input type="hidden" asp-for="BookId" />
+
+    <input type="hidden" asp-for="NoteId" />
 
     <div class="mb-3">
         <label asp-for="Title" class="form-label"></label>
@@ -15,25 +17,14 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Category" class="form-label"></label>
-        <select asp-for="Category" class="form-select">
-            <option value="">(none)</option>
-            <option>Classic</option>
-            <option>Fiction</option>
-            <option>Poetry</option>
-            <option>Reference</option>
-            <option>Textbook</option>
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Price" class="form-label"></label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
+        <label asp-for="Body" class="form-label"></label>
+        <textarea asp-for="Body" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Body" class="text-danger"></span>
     </div>
 
     <div>
         <button type="submit" class="btn btn-primary">Save</button>
         <a asp-action="Index" class="btn btn-link">Cancel</a>
     </div>
+
 </form>
