@@ -32,7 +32,7 @@
                 <td class="text-end">@(member.  JoinDate.ToString("yyyy-MM-dd") ?? "—")</td>
                 <td class="text-end">
                     <a asp-action="Edit" asp-route-id="@member.MemberId" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    @* Task 11 puts the Delete button here *@
+                    <a asp-action="Delete" asp-route-id="@member.MemberId" class="btn btn-sm btn-outline-danger">Delete</a>
                 </td>
             </tr>
         }

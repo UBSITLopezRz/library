@@ -59,6 +59,26 @@ public class MembersController : Controller
         await _members.UpdateAsync(member);
         return RedirectToAction(nameof(Index));
     }
+    // GET /Books/Delete/5 : ask "are you sure?"
+    public async Task<IActionResult> Delete(long id)
+    {
+        var book = await _members.GetByIdAsync(id);
+        if (book == null)
+        {
+            return NotFound();
+        }
+        return View(book);
+    }
+    // POST /Books/Delete/5 : the delete was confirmed.
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(long id)
+    {
+        await _members.DeleteAsync(id);
+        return RedirectToAction(nameof(Index));
+    }
+
+
 
 
 
