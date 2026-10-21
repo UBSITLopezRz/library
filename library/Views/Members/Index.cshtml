@@ -29,9 +29,9 @@
                 <td>@member.FullName</td>
                 <td>@member.Email</td>
                 <td><span class="badge text-bg-secondary">@(member.MemberType ?? "—")</span></td>
-                <td class="text-end">@(member.JoinDate.ToString("yyyy-MM-dd") ?? "—")</td>
+                <td class="text-end">@(member.  JoinDate.ToString("yyyy-MM-dd") ?? "—")</td>
                 <td class="text-end">
-                    @* Task 10 puts the Edit button here *@
+                    <a asp-action="Edit" asp-route-id="@member.MemberId" class="btn btn-sm btn-outline-secondary">Edit</a>
                     @* Task 11 puts the Delete button here *@
                 </td>
             </tr>
