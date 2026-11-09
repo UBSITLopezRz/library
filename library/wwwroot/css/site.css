@@ -1,5 +1,32 @@
+/* =========================================
+   CYBERPUNK THEME
+   Neon cyan / magenta / yellow on near-black
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --bg: #07070f;
+    --bg-2: #0e0e1c;
+    --panel: #12122a;
+    --line: #26264a;
+    --text: #d6e4ff;
+    --muted: #7f8bb3;
+    --cyan: #00f0ff;
+    --magenta: #ff2a6d;
+    --yellow: #fcee0a;
+    --purple: #8b2fff;
+    --green: #05ffa1;
+    --glow-cyan: 0 0 8px rgba(0, 240, 255, .6), 0 0 22px rgba(0, 240, 255, .25);
+    --glow-magenta: 0 0 8px rgba(255, 42, 109, .6), 0 0 22px rgba(255, 42, 109, .25);
+    --font-display: 'Orbitron', 'Segoe UI', sans-serif;
+    --font-mono: 'Share Tech Mono', Consolas, monospace;
+}
+
 html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,19 +35,107 @@ html {
     }
 }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body {
     margin-bottom: 60px;
-    background: #f4f6f8;
+    color: var(--text);
+    font-family: var(--font-mono);
+    background-color: var(--bg);
+    background-image: linear-gradient(rgba(0, 240, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, .05) 1px, transparent 1px), radial-gradient(ellipse at 15% 0%, rgba(139, 47, 255, .25), transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(255, 42, 109, .18), transparent 50%);
+    background-size: 40px 40px, 40px 40px, auto, auto;
+    background-attachment: fixed;
+}
+
+    /* CRT scanlines */
+    body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9999;
+        background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0, rgba(0, 0, 0, .18) 1px, transparent 1px, transparent 3px);
+    }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+a {
+    color: var(--cyan);
+}
+
+    a:hover {
+        color: var(--magenta);
+    }
+
+::selection {
+    background: var(--magenta);
+    color: #fff;
+}
+
+.text-muted {
+    color: var(--muted) !important;
+}
+
+.text-dark {
+    color: var(--text) !important;
+}
+
+.text-danger {
+    color: var(--magenta) !important;
 }
 
 
 /* =========================================
-   GENERAL FOCUS
+   NAVBAR / FOOTER (Bootstrap layout)
+   ========================================= */
+
+.navbar,
+.navbar.bg-white {
+    background: rgba(7, 7, 15, .92) !important;
+    border-bottom: 1px solid var(--cyan) !important;
+    box-shadow: 0 0 18px rgba(0, 240, 255, .25);
+}
+
+.navbar-brand {
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: var(--cyan) !important;
+    text-shadow: var(--glow-cyan);
+}
+
+.navbar .nav-link {
+    color: var(--text) !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: .85rem;
+}
+
+    .navbar .nav-link:hover {
+        color: var(--magenta) !important;
+        text-shadow: var(--glow-magenta);
+    }
+
+.navbar-toggler {
+    border-color: var(--cyan);
+    background: var(--cyan);
+}
+
+.footer {
+    background: transparent;
+    border-top: 1px solid var(--line) !important;
+    color: var(--muted) !important;
+}
+
+    .footer a {
+        color: var(--cyan);
+    }
+
+
+/* =========================================
+   GENERAL FOCUS + FORMS
    ========================================= */
 
 .btn:focus,
@@ -29,12 +144,40 @@ body {
 .form-control:focus,
 .form-check-input:focus,
 .form-select:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 .1rem var(--bg), 0 0 0 .25rem var(--cyan), var(--glow-cyan);
+}
+
+.form-control,
+.form-select {
+    background-color: var(--bg-2);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 0;
+    font-family: var(--font-mono);
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        background-color: var(--bg-2);
+        color: #fff;
+        border-color: var(--cyan);
+    }
+
+    .form-control::placeholder {
+        color: var(--muted);
+    }
+
+.form-label,
+label {
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: .8rem;
 }
 
 .form-floating > .form-control-plaintext::placeholder,
 .form-floating > .form-control::placeholder {
-    color: var(--bs-secondary-color);
+    color: var(--muted);
     text-align: end;
 }
 
@@ -43,17 +186,167 @@ body {
     text-align: start;
 }
 
+.field-validation-error,
+.validation-summary-errors {
+    color: var(--magenta);
+    text-shadow: 0 0 6px rgba(255, 42, 109, .5);
+}
+
+.input-validation-error {
+    border-color: var(--magenta) !important;
+    box-shadow: var(--glow-magenta);
+}
+
+/* Cards (Borrow form, etc.) */
+.card {
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--cyan);
+    border-radius: 0;
+    box-shadow: var(--glow-cyan);
+    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+/* Alerts (red message on the Delete page) */
+.alert-danger {
+    background: rgba(255, 42, 109, .12);
+    color: var(--magenta);
+    border: 1px solid var(--magenta);
+    border-left: 5px solid var(--magenta);
+    border-radius: 0;
+    box-shadow: var(--glow-magenta);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   BOOTSTRAP BUTTONS + TABLES + BADGES
+   ========================================= */
+
+.btn {
+    border-radius: 0;
+    font-family: var(--font-display);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: .8rem;
+}
+
+.btn-primary {
+    background: transparent;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    box-shadow: var(--glow-cyan);
+}
+
+    .btn-primary:hover, .btn-primary:active {
+        background: var(--cyan);
+        color: var(--bg);
+        border-color: var(--cyan);
+    }
+
+.btn-danger {
+    background: transparent;
+    color: var(--magenta);
+    border: 1px solid var(--magenta);
+}
+
+    .btn-danger:hover {
+        background: var(--magenta);
+        color: #fff;
+        box-shadow: var(--glow-magenta);
+    }
+
+.btn-secondary, .btn-outline-secondary {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+}
+
+.btn-outline-primary {
+    color: var(--cyan);
+    border-color: var(--cyan);
+}
+
+    .btn-outline-primary:hover {
+        background: var(--cyan);
+        color: var(--bg);
+    }
+
+.btn-outline-success {
+    color: var(--green);
+    border-color: var(--green);
+}
+
+    .btn-outline-success:hover {
+        background: var(--green);
+        color: var(--bg);
+        box-shadow: 0 0 12px rgba(5, 255, 161, .6);
+    }
+
+.btn-link {
+    color: var(--cyan);
+}
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text);
+    --bs-table-striped-bg: rgba(0, 240, 255, .04);
+    --bs-table-striped-color: var(--text);
+    --bs-table-hover-bg: rgba(255, 42, 109, .10);
+    --bs-table-hover-color: #fff;
+    --bs-table-border-color: var(--line);
+    color: var(--text);
+}
+
+.table-dark {
+    --bs-table-bg: #050510;
+    --bs-table-color: var(--cyan);
+    --bs-table-border-color: var(--cyan);
+}
+
+    .table-dark th {
+        font-family: var(--font-display);
+        font-size: .75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-shadow: var(--glow-cyan);
+    }
+
+/* Loan status badges */
+.badge {
+    border-radius: 0;
+    font-family: var(--font-display);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: .68rem;
+    background: transparent !important;
+    border: 1px solid currentColor;
+}
+
+.text-bg-danger {
+    color: var(--magenta) !important;
+    box-shadow: var(--glow-magenta);
+}
+
+.text-bg-warning {
+    color: var(--yellow) !important;
+    box-shadow: 0 0 10px rgba(252, 238, 10, .45);
+}
+
+.text-bg-secondary {
+    color: var(--muted) !important;
+}
+
 
 /* =========================================
    BOOKS
-   PROFESSIONAL LIBRARY SYSTEM
    ========================================= */
 
 .library-page {
     max-width: 1200px;
     margin: 30px auto;
 }
-
 
 /* Header */
 
@@ -62,48 +355,55 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    background: #ffffff;
-    border-left: 5px solid #315c91;
-    border-radius: 10px;
+    background: var(--panel);
+    border: 1px solid var(--cyan);
+    border-left: 6px solid var(--cyan);
     padding: 28px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--glow-cyan);
+    clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%);
 }
 
 .library-label {
-    color: #315c91;
-    font-size: 0.75rem;
+    color: var(--magenta);
+    font-size: .75rem;
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
+    text-shadow: var(--glow-magenta);
 }
 
 .library-header h1 {
     margin: 6px 0;
-    color: #1f2937;
-    font-weight: 700;
+    color: #fff;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-shadow: 2px 0 var(--magenta), -2px 0 var(--cyan);
 }
 
 .library-header p {
     margin: 0;
-    color: #6b7280;
+    color: var(--muted);
 }
-
 
 /* Add Book */
 
 .btn-library-primary {
-    background: #315c91;
-    color: white;
-    border: none;
-    font-weight: 600;
+    background: transparent;
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     padding: 10px 18px;
-    border-radius: 6px;
+    border-radius: 0;
+    box-shadow: 0 0 10px rgba(252, 238, 10, .4);
 }
 
     .btn-library-primary:hover {
-        background: #24466e;
-        color: white;
+        background: var(--yellow);
+        color: var(--bg);
+        box-shadow: 0 0 22px rgba(252, 238, 10, .8);
     }
-
 
 /* Statistics */
 
@@ -118,10 +418,10 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    background: white;
-    border-radius: 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-bottom: 3px solid var(--magenta);
     padding: 20px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
 }
 
 .library-stat-icon {
@@ -130,34 +430,37 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #eaf1fa;
-    border-radius: 10px;
-    color: #315c91;
-    font-size: 0.7rem;
+    background: rgba(0, 240, 255, .08);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    font-size: .7rem;
     font-weight: bold;
-    letter-spacing: 0.5px;
+    letter-spacing: .5px;
+    text-shadow: var(--glow-cyan);
 }
 
 .library-stat-card span {
     display: block;
-    color: #6b7280;
-    font-size: 0.85rem;
+    color: var(--muted);
+    font-size: .85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .library-stat-card strong {
     display: block;
-    color: #1f2937;
-    font-size: 1.3rem;
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
 }
-
 
 /* Catalogue */
 
 .library-card {
-    background: white;
-    border-radius: 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
     overflow: hidden;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 0 25px rgba(139, 47, 255, .2);
 }
 
 .library-card-header {
@@ -165,145 +468,143 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 22px 25px;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--cyan);
 }
 
     .library-card-header h2 {
         margin: 0;
-        color: #1f2937;
-        font-size: 1.3rem;
+        color: var(--cyan);
+        font-size: 1.2rem;
+        text-transform: uppercase;
     }
 
     .library-card-header p {
         margin: 4px 0 0;
-        color: #6b7280;
+        color: var(--muted);
     }
 
 .library-record-count {
-    background: #eef3f8;
-    color: #315c91;
+    background: transparent;
+    color: var(--green);
+    border: 1px solid var(--green);
     padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: .85rem;
     font-weight: 600;
+    box-shadow: 0 0 10px rgba(5, 255, 161, .35);
 }
-
 
 /* Table */
 
 .library-table {
     margin: 0;
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text);
 }
 
     .library-table thead {
-        background: #f3f5f7;
+        background: #050510;
     }
 
     .library-table th {
-        color: #4b5563;
-        font-size: 0.85rem;
+        color: var(--cyan);
+        font-family: var(--font-display);
+        font-size: .75rem;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 2px;
         padding: 15px;
-        border-bottom: 2px solid #e5e7eb;
+        border-bottom: 2px solid var(--cyan);
+        background: transparent;
     }
 
     .library-table td {
         padding: 16px 15px;
-        border-color: #edf0f2;
+        border-color: var(--line);
+        background: transparent;
+        color: var(--text);
     }
 
     .library-table tbody tr:hover td {
-        background: #f8fafc;
+        background: rgba(0, 240, 255, .07);
+        box-shadow: inset 3px 0 0 var(--magenta);
     }
 
-
-/* Book ID */
-
 .book-id {
-    color: #6b7280;
+    color: var(--muted);
     font-weight: 600;
 }
-
-
-/* Book Title */
 
 .book-title {
     font-weight: 600;
-    color: #1f2937;
+    color: #fff;
 }
-
-
-/* Category */
 
 .book-category {
     display: inline-block;
-    background: #eef3f8;
-    color: #315c91;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
+    background: transparent;
+    color: var(--purple);
+    border: 1px solid var(--purple);
+    padding: 4px 10px;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #b98bff;
 }
-
 
 /* Edit */
 
 .btn-library-edit {
-    color: #315c91;
-    border: 1px solid #315c91;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
     background: transparent;
 }
 
     .btn-library-edit:hover {
-        background: #315c91;
-        color: white;
+        background: var(--cyan);
+        color: var(--bg);
+        box-shadow: var(--glow-cyan);
     }
-
 
 /* Delete */
 
 .btn-library-delete {
-    color: #b42318;
-    border: 1px solid #b42318;
+    color: var(--magenta);
+    border: 1px solid var(--magenta);
     background: transparent;
 }
 
     .btn-library-delete:hover {
-        background: #b42318;
-        color: white;
+        background: var(--magenta);
+        color: #fff;
+        box-shadow: var(--glow-magenta);
     }
-
 
 /* Footer */
 
 .library-footer {
     text-align: center;
     margin-top: 20px;
-    color: #6b7280;
-    font-size: 0.85rem;
+    color: var(--muted);
+    font-size: .85rem;
+    letter-spacing: 2px;
 }
 
 
 /* =========================================
-   MEMBERS
-   CHINESE NEW YEAR ATTENDANCE
+   MEMBERS  (NEON DISTRICT ACCESS LOG)
    ========================================= */
 
 .cny-page {
     max-width: 1200px;
     margin: 30px auto;
-    background: #fff4d6;
-    border: 3px solid #b51f1f;
-    border-radius: 12px;
+    background: rgba(18, 8, 30, .85);
+    border: 1px solid var(--magenta);
     padding: 30px;
-    color: #4a1c1c;
-    box-shadow: 0 8px 25px rgba(120, 0, 0, 0.25);
+    color: var(--text);
+    box-shadow: var(--glow-magenta), inset 0 0 40px rgba(255, 42, 109, .08);
+    clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px));
 }
 
-
-/* =========================================
-   CNY HEADER
-   ========================================= */
+/* Header */
 
 .cny-header {
     position: relative;
@@ -311,12 +612,12 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 190px;
-    background: #c92323;
-    border-radius: 10px;
-    border: 2px solid #f3c542;
+    background: linear-gradient(135deg, rgba(139, 47, 255, .55), rgba(255, 42, 109, .45)), repeating-linear-gradient(45deg, transparent 0 12px, rgba(255, 255, 255, .04) 12px 24px);
+    border: 1px solid var(--yellow);
     padding: 30px 70px;
-    color: #fff4c4;
+    color: #fff;
     overflow: hidden;
+    box-shadow: 0 0 18px rgba(252, 238, 10, .35);
 }
 
 .cny-title {
@@ -326,47 +627,51 @@ body {
 }
 
 .cny-small-title {
-    font-size: 0.85rem;
-    letter-spacing: 4px;
-    color: #ffd95a;
+    font-size: .85rem;
+    letter-spacing: 6px;
+    color: var(--yellow);
     font-weight: bold;
+    text-shadow: 0 0 8px rgba(252, 238, 10, .7);
 }
 
 .cny-title h1 {
     margin: 10px 0;
     font-size: 2.8rem;
-    font-weight: 800;
-    color: #ffd95a;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 3px 0 var(--magenta), -3px 0 var(--cyan);
+    animation: glitch 3.5s infinite;
 }
 
 .cny-title p {
     margin: 8px 0 0;
-    color: #fff1c1;
+    color: #e8d9ff;
     font-size: 1rem;
 }
 
 .cny-ornament {
-    color: #ffd95a;
+    color: var(--cyan);
     font-size: 1.1rem;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
+    text-shadow: var(--glow-cyan);
 }
 
-
-/* Lantern text */
+/* Side tags */
 
 .cny-lantern {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     padding: 15px 10px;
-    background: #9e1717;
-    border: 2px solid #f3c542;
-    border-radius: 8px;
-    color: #ffd95a;
-    font-size: 0.65rem;
+    background: rgba(0, 0, 0, .55);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    font-size: .65rem;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     text-align: center;
+    box-shadow: var(--glow-cyan);
 }
 
     .cny-lantern.left {
@@ -377,10 +682,28 @@ body {
         right: 25px;
     }
 
+@keyframes glitch {
+    0%, 92%, 100% {
+        transform: translate(0);
+        text-shadow: 3px 0 var(--magenta), -3px 0 var(--cyan);
+    }
 
-/* =========================================
-   REGISTER BUTTON
-   ========================================= */
+    93% {
+        transform: translate(-3px, 1px);
+        text-shadow: -5px 0 var(--magenta), 5px 0 var(--cyan);
+    }
+
+    95% {
+        transform: translate(3px, -1px);
+        text-shadow: 5px 0 var(--magenta), -5px 0 var(--cyan);
+    }
+
+    97% {
+        transform: translate(-1px, 0);
+    }
+}
+
+/* Register button */
 
 .cny-actions {
     display: flex;
@@ -389,51 +712,44 @@ body {
 }
 
 .btn-cny {
-    background: #d4a017;
-    color: #641414;
-    border: 2px solid #9b7010;
+    background: transparent;
+    color: var(--green);
+    border: 1px solid var(--green);
+    font-family: var(--font-display);
     font-weight: bold;
-    border-radius: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 0;
     padding: 10px 18px;
+    box-shadow: 0 0 10px rgba(5, 255, 161, .4);
 }
 
     .btn-cny:hover {
-        background: #f0bd22;
-        color: #4a1010;
-        border-color: #7e5a0b;
+        background: var(--green);
+        color: var(--bg);
+        box-shadow: 0 0 24px rgba(5, 255, 161, .8);
     }
 
-
-/* =========================================
-   DIVIDER
-   ========================================= */
+/* Divider */
 
 .cny-divider {
     text-align: center;
-    color: #b51f1f;
-    font-size: 0.9rem;
+    color: var(--magenta);
+    font-size: .9rem;
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     margin: 15px 0 20px;
+    text-shadow: var(--glow-magenta);
 }
 
-
-/* =========================================
-   ATTENDANCE PANEL
-   ========================================= */
+/* Panel */
 
 .cny-scroll {
-    background: #fff9e8;
-    border: 2px solid #d4a017;
-    border-radius: 10px;
+    background: var(--panel);
+    border: 1px solid var(--cyan);
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(100, 30, 0, 0.12);
+    box-shadow: var(--glow-cyan);
 }
-
-
-/* =========================================
-   PANEL HEADER
-   ========================================= */
 
 .cny-scroll-header {
     display: flex;
@@ -442,168 +758,154 @@ body {
     gap: 20px;
     text-align: center;
     padding: 20px;
-    background: #a71919;
-    color: #fff4cf;
+    background: linear-gradient(90deg, #050510, #1a0b33, #050510);
+    border-bottom: 1px solid var(--cyan);
+    color: #fff;
 }
 
     .cny-scroll-header span {
-        color: #ffd95a;
-        font-size: 0.75rem;
+        color: var(--yellow);
+        font-size: .75rem;
         font-weight: bold;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
     }
 
     .cny-scroll-header h2 {
         margin: 0;
-        color: #ffd95a;
-        font-weight: bold;
+        color: var(--cyan);
+        font-weight: 900;
+        text-transform: uppercase;
+        text-shadow: var(--glow-cyan);
     }
 
     .cny-scroll-header p {
         margin: 3px 0 0;
-        font-size: 0.85rem;
-        color: #ffeab0;
+        font-size: .85rem;
+        color: var(--muted);
     }
 
-
-/* =========================================
-   ATTENDANCE TABLE
-   ========================================= */
+/* Table */
 
 .cny-table {
     margin-bottom: 0;
-    color: #4a1c1c;
+    color: var(--text);
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text);
 }
 
     .cny-table thead {
-        background: #d4a017;
-        color: #5b1515;
+        background: #050510;
+        color: var(--cyan);
     }
 
     .cny-table th {
         padding: 15px;
-        font-weight: bold;
-        border-bottom: 2px solid #a71919;
+        font-family: var(--font-display);
+        font-size: .75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--cyan);
+        background: transparent;
+        border-bottom: 2px solid var(--magenta);
     }
 
     .cny-table td {
         padding: 15px;
-        border-color: #ead8a7;
-        background: #fff9e8;
+        border-color: var(--line);
+        background: transparent;
+        color: var(--text);
     }
 
     .cny-table tbody tr:hover td {
-        background: #fff0c2;
+        background: rgba(255, 42, 109, .09);
+        box-shadow: inset 3px 0 0 var(--cyan);
     }
-
-
-/* =========================================
-   MEMBER ID
-   ========================================= */
 
 .cny-number {
     text-align: center;
     font-weight: bold;
-    color: #a71919;
+    color: var(--magenta);
 }
-
-
-/* =========================================
-   MEMBER NAME
-   ========================================= */
 
 .cny-name {
     font-weight: bold;
-    color: #8e1717;
+    color: #fff;
     font-size: 1.05rem;
 }
 
-
-/* =========================================
-   MEMBER TYPE
-   ========================================= */
-
 .cny-badge {
     display: inline-block;
-    background: #a71919;
-    color: #ffd95a;
-    border: 1px solid #7e1010;
-    border-radius: 20px;
-    padding: 5px 13px;
-    font-size: 0.85rem;
+    background: transparent;
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    padding: 4px 13px;
+    font-size: .8rem;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
-
-
-/* =========================================
-   ATTENDANCE STATUS
-   ========================================= */
 
 .cny-attendance {
     display: inline-block;
-    background: #e8f5e9;
-    color: #198754;
-    border: 1px solid #a5d6a7;
-    border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 0.85rem;
+    background: rgba(5, 255, 161, .1);
+    color: var(--green);
+    border: 1px solid var(--green);
+    padding: 4px 12px;
+    font-size: .8rem;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 8px rgba(5, 255, 161, .35);
 }
 
-
-/* =========================================
-   EDIT
-   ========================================= */
+/* Edit */
 
 .btn-cny-outline {
-    color: #a71919;
-    border: 1px solid #a71919;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
     background: transparent;
 }
 
     .btn-cny-outline:hover {
-        background: #a71919;
-        color: #ffd95a;
+        background: var(--cyan);
+        color: var(--bg);
+        box-shadow: var(--glow-cyan);
     }
 
-
-/* =========================================
-   DELETE
-   ========================================= */
+/* Delete */
 
 .btn-cny-danger {
-    color: #8b1111;
-    border: 1px solid #8b1111;
+    color: var(--magenta);
+    border: 1px solid var(--magenta);
     background: transparent;
 }
 
     .btn-cny-danger:hover {
-        background: #8b1111;
+        background: var(--magenta);
         color: #fff;
+        box-shadow: var(--glow-magenta);
     }
 
-
-/* =========================================
-   CNY FOOTER
-   ========================================= */
+/* Footer */
 
 .cny-footer {
     text-align: center;
     margin-top: 28px;
     padding-top: 20px;
-    border-top: 2px solid #d4a017;
-    color: #8e1717;
+    border-top: 1px solid var(--magenta);
+    color: var(--magenta);
 }
 
     .cny-footer div {
-        font-size: 0.9rem;
-        letter-spacing: 3px;
+        font-size: .9rem;
+        letter-spacing: 4px;
         margin-bottom: 8px;
     }
 
     .cny-footer small {
-        color: #856b45;
-        font-style: italic;
+        color: var(--muted);
+        font-style: normal;
+        letter-spacing: 1px;
     }
 
 
@@ -648,7 +950,7 @@ body {
         }
 
     .cny-small-title {
-        font-size: 0.7rem;
+        font-size: .7rem;
         letter-spacing: 2px;
     }
 
@@ -667,5 +969,11 @@ body {
 
     .cny-scroll-header span {
         display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cny-title h1 {
+        animation: none;
     }
 }

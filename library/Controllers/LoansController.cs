@@ -36,6 +36,7 @@ public class LoansController : Controller
         await FillDropdownsAsync();
         return View(new BorrowForm());
     }
+
     // POST /Loans/Borrow : the form was submitted.
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -61,12 +62,25 @@ public class LoansController : Controller
                 $"This member already has {LoanRepository.MaxOpenLoans} books out. Nothing was saved.");
         }
 
+
+
         // Fill both dropdowns again.
         await FillDropdownsAsync();
 
         // Show the form again, with what was chosen.
         return View(form);
     }
+    // POST /Loans/Return/5 : the Return button was pressed.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Return(long id)
+    {
+        await _loans.ReturnAsync(id);
+        return RedirectToAction(nameof(Index));
+    }
+
+
+
 
 
 
