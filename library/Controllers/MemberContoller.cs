@@ -22,48 +22,74 @@ public class MembersController : Controller
         return View(new Member());
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(Member member)
+    // POST /Members/Create : the form was submitted.
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Create(Member member)
+{
+    if (!ModelState.IsValid)
     {
-        if (!ModelState.IsValid)
-        {
-            return View(member);
-        }
-        await _members.AddAsync(member);
-        return RedirectToAction(nameof(Index));
+        // 2. Show the form again, with what was typed.
+        return View(member);
     }
+
+    try
+    {
+        // 3. Save the new member.
+        await _members.AddAsync(member);
+    }
+    catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
+    {
+        // 5. Put a message under the Email box.
+        ModelState.AddModelError("Email", "Another member already uses this email.");
+
+        // 6. Show the form again, with what was typed.
+        return View(member);
+    }
+
+    // 7. The member was saved: go back to the list.
+    return RedirectToAction(nameof(Index));
+}
+    // GET: Members/Edit/5
     public async Task<IActionResult> Edit(long id)
     {
         var member = await _members.GetByIdAsync(id);
+
         if (member == null)
         {
             return NotFound();
         }
+
         return View(member);
     }
 
+    // POST /Members/Edit/5 : the changed form was submitted.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(Member member)
     {
         if (!ModelState.IsValid)
         {
+            // 2. Show the form again, with what was typed.
             return View(member);
         }
 
-        await _members.UpdateAsync(member);
-
-        return RedirectToAction(nameof(Index));
-    }
-    public async Task<IActionResult> Delete(long id)
-    {
-        var member = await _members.GetByIdAsync(id);
-        if (member == null)
+        try
         {
-            return NotFound();
+            // 3. Save the changes.
+            await _members.UpdateAsync(member);
         }
-        return View(member);
+        catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
+        {
+            // 5. Put a message under the Email box.
+            ModelState.AddModelError("Email", "Another member already uses this email.");
+
+            // 6. Show the form again, with what was typed.
+            return View(member);
+        }
+
+        // 7. The changes were saved: go back to the list.
+        return RedirectToAction(nameof(Index));
     }
 
 
