@@ -4,42 +4,51 @@
     ViewData["Title"] = "Delete a member";
 }
 
-<h1 class="mb-3">Delete a member</h1>
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">@ViewBag.Error</div>
-}
+<div class="library-page library-danger">
 
+    <div class="library-header">
+        <div>
+            <h1 class="mb-0">Delete a member</h1>
+            <p class="mb-0">This action cannot be undone.</p>
+        </div>
+    </div>
 
-<div class="card card-body" style="max-width:36rem">
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+    }
 
-    <p>Are you sure you want to delete this member?</p>
+    <div class="library-card card-body library-delete-card mt-3">
 
-    <dl class="row mb-2">
+        <p>Are you sure you want to delete this member?</p>
 
-        <dt class="col-4">Name</dt>
-        <dd class="col-8">@Model.FullName</dd>
+        <dl class="row mb-2">
 
-        <dt class="col-4">Email</dt>
-        <dd class="col-8">@(Model.Email ?? "—")</dd>
+            <dt class="col-4">Name</dt>
+            <dd class="col-8">@Model.FullName</dd>
 
-        <dt class="col-4">Type</dt>
-        <dd class="col-8">@Model.MemberType</dd>
+            <dt class="col-4">Email</dt>
+            <dd class="col-8">@(Model.Email ?? "—")</dd>
 
-    </dl> 
-     
-    <form asp-action="Delete"
-          asp-route-id="@Model.MemberId"
-          method="post">
+            <dt class="col-4">Type</dt>
+            <dd class="col-8">@Model.MemberType</dd>
 
-        <button type="submit" class="btn btn-danger">
-            Delete
-        </button>
+        </dl>
 
-        <a asp-action="Index" class="btn btn-link">
-            Cancel
-        </a>
+        <form asp-action="Delete"
+              asp-route-id="@Model.MemberId"
+              method="post">
 
-    </form>
+            <button type="submit" class="btn btn-library-delete-solid">
+                Delete
+            </button>
+
+            <a asp-action="Index" class="btn btn-library-edit">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
 
 </div>

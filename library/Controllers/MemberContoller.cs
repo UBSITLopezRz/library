@@ -99,6 +99,19 @@ public class MembersController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+
+    // GET /Members/Delete/5 : show the "Are you sure?" page.
+    public async Task<IActionResult> Delete(long id)
+    {
+        var member = await _members.GetByIdAsync(id);
+
+        if (member == null)
+        {
+            return NotFound();
+        }
+
+        return View(member);
+    }
     // POST /Members/Delete/5 : the delete was confirmed.
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
