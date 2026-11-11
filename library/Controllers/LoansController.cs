@@ -78,10 +78,4 @@ public class LoansController : Controller
         await _loans.ReturnAsync(id);
         return RedirectToAction(nameof(Index));
     }
-
-
-
-
-
-
 }
